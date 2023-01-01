@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../../api";
+import axios from "axios"
 import { AuthContext } from "../../context/AuthContext";
 import "./login.css";
 
@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axiosInstance.post("/auth/login", credentials);
+      const res = await axios.post("https://myplace-server-production.up.railway.app/api/auth/login", credentials,{withCredentials: true});
       console.log(res);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate("/")
