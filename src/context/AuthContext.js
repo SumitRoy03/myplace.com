@@ -43,7 +43,6 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
   useEffect(() => {
-    console.table(state);
     localStorage.setItem("user", JSON.stringify(state.user));
   }, [state.user]); //Doesn't rerender the page ??? fix it...
 

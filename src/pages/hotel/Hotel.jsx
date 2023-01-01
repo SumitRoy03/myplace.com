@@ -24,6 +24,7 @@ const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [photo, setPhoto] = useState(undefined);
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
@@ -63,7 +64,6 @@ const Hotel = () => {
       navigate("/login");
     }
   };
-
   return (
     <div>
       <Navbar />
@@ -112,16 +112,18 @@ const Hotel = () => {
               free airport taxi
             </span>
             <div className="hotelImages">
-              {data.photos?.map((photo, i) => (
-                <div className="hotelImgWrapper" key={i}>
+              {data.photos ? (
+                <div className="hotelImgWrapper" key={0}>
                   <img
-                    onClick={() => handleOpen(i)}
-                    src={photo}
+                    onClick={() => handleOpen(0)}
+                    src={data.photos[0]}
                     alt=""
                     className="hotelImg"
                   />
                 </div>
-              ))}
+              ) : (
+                "Loading..."
+              )}
             </div>
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">
