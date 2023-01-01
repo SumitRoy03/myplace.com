@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../api";
+import axios from "axios";
 
 const useFetch = (url) => {
   const [data, setData] = useState([]);
@@ -9,7 +10,7 @@ const useFetch = (url) => {
     const fetchData = async() => {
       setLoading(true);
       try {
-        const res = await axiosInstance.get(url);
+        const res = await axios.get(`https://myplace-server-production.up.railway.app/api${url}`,{withCredentials: true});
         setData(res.data);
       } catch (err) {
         setError(err);
@@ -22,7 +23,7 @@ const useFetch = (url) => {
   const reFetch = async () => {
     setLoading(true);
     try {
-      const res = await axiosInstance.get(url);
+      const res = await axios.get(`https://myplace-server-production.up.railway.app/api${url}`,{withCredentials: true});
       setData(res.data);
     } catch (err) {
       setError(err);
